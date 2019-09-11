@@ -20,7 +20,7 @@
         <a href="detailSelect.html">詳細検索</a>
         <br><br>
        
-            <a href="itiran.html" class="underLeft">機能一覧に戻る</a>
+            <a href="<?=$this->Url->build(['controller'=>'Users','action'=>'index']);?>" class="underLeft">機能一覧に戻る</a>
     </div>
 
 

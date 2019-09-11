@@ -15,24 +15,28 @@
         <h2>以下の内容で登録しました</h2>
         <table >
                 <tr>
+
                     <td>題名：</td>
                     <td>
-                       
+                       <?= h($info['title'])?>
                     </td>
                 </tr>
                 <tr>
                     <td>著者：</td>
                     <td>
+                    <?= h($info['author'])?>
                     </td>
                 </tr>
                 <tr>
                     <td>出版者：</td>
                     <td>
+                    <?= h($info['publisher'])?>
                     </td>
                 </tr>
                 <tr>
                     <td>出版年月：</td>
                     <td>
+                    <?= h($info['year_month']) ?>
                     </td>
                 </tr>
             </table>
