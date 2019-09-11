@@ -26,15 +26,29 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
+     <!-- <?= $this->Html->css('base.css') ?> -->
+    <!-- <?= $this->Html->css('style.css') ?> -->
+    <?= $this->Html->css('myBookShelfCSS.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
+<header class="hed">
+
+        <?php
+        echo $this->Html->image("logoWhiteS.png",array('url'=>array('controller'=>'Users','action'=>'index')));
+        ?>
+        </a>
+
+        <div class="right">
+        <?php
+        echo $this->request->session()->read('Auth.User.name')?>さん
+        </div>
+        <a href="" class="underRight">ログアウト</a>
+    </header>
+    <!-- <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
                 <h1><a href=""><?= $this->fetch('title') ?></a></h1>
@@ -46,7 +60,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>

@@ -1,0 +1,75 @@
+.center {
+            position: absolute;
+            top: 20%;
+            left: 40%;
+            padding: 50px;
+
+        }
+.hed {
+    width: 100%;
+    height: 100px;
+    background-color: chocolate;
+}
+
+.right {
+    position: absolute;
+    right: 10px;
+    top: 10px
+}
+
+.underRight {
+    position: absolute;
+    right: 10px;
+    top: 80px
+}
+
+body {
+    background-image: url('../img/backGroundBookshelf.jpg');
+    background-size: cover;
+}
+.fontWhite {
+            color: papayawhip;
+        }
+.bg-rgba {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 40%;
+    margin: 30px 30%;
+    text-align: center;
+    position: relative;
+    padding: 30px;
+}
+table{
+    margin: auto;
+}
+.inp{
+    width: 220px;
+}
+.button {
+    /* 文字サイズを1.4emに指定 */
+    font-size: 1.1em;
+
+    /* 文字の太さをboldに指定 */
+    font-weight: bold;
+
+    /* 縦方向に10px、
+         * 横方向に30pxの余白を指定 */
+    padding: px 20px;
+
+    /* 背景色を濃い青色に指定 */
+    background-color: #248;
+
+    /* 文字色を白色に指定 */
+    color: #fff;
+
+    /* ボーダーをなくす */
+    border-style: none;
+    position: absolute;
+    right: 40px;
+    bottom: 10px;
+    
+}
+.underLeft{
+    position: absolute;
+    left:10px;
+    bottom: 0px;
+}
