@@ -42,11 +42,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         ?>
         </a>
 
-        <div class="right">
+        <div class="right">ログイン：
         <?php
-        echo $this->request->session()->read('Auth.User.name')?>さん
+        echo $this->request->session()->read('Auth.User.name')?>　さん
         </div>
-        <a href="" class="underRight">ログアウト</a>
+        <a href="<?=$this->Url->build(['controller'=>'Users','action'=>'logout']);?>" class="underRight">ログアウト</a>
     </header>
     <!-- <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">

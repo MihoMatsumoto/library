@@ -18,25 +18,25 @@
 
                     <td>題名：</td>
                     <td>
-                       <?= h($info['title'])?>
+                       <?= h($entiey['title'])?>
                     </td>
                 </tr>
                 <tr>
                     <td>著者：</td>
                     <td>
-                    <?= h($info['author'])?>
+                    <?= h($entiey['author'])?>
                     </td>
                 </tr>
                 <tr>
                     <td>出版者：</td>
                     <td>
-                    <?= h($info['publisher'])?>
+                    <?= h($entiey['publisher'])?>
                     </td>
                 </tr>
                 <tr>
                     <td>出版年月：</td>
                     <td>
-                    <?= h($info['year_month']) ?>
+                    <?= h($entiey['year_month']) ?>
                     </td>
                 </tr>
             </table>

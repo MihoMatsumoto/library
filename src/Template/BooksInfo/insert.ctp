@@ -14,12 +14,18 @@
     <div class="bg-rgba">
         <h2>書籍登録</h2>
         <table >
-                <?= $this->Form->create(null,array("controller"=>"BooksInfo","action"=>"compInsert"));
+                <?= $this->Form->create($ValidationError,array("controller"=>"BooksInfo","action"=>"compInsert"));
                  ?>
+                 <tr>
+                 <!-- <div style="color:red;"> -->
+                 <?= $this->Form->error('title')?>
+                 <!-- <?= $this->Form->error('yearMonth')?> -->
+                 <!-- </div> -->
+                 </tr>
                 <tr>
                     <td>題名：</td>
                     <td>
-                        <?= $this->Form->control('title',array('label'=>false,'maxlength'=>'50','class'=>'inp','required'=>true)); ?>
+                        <?= $this->Form->conttrol('title',array('label'=>false,'maxlength'=>'50','class'=>'inp','required'=>true)); ?>
                     </td>
                 </tr>
                 <tr>
@@ -41,6 +47,7 @@
                     'type'=>'datetime','dateformat'=>'YMD','monthNames'=>false,'templates'=>['dateWidget'=>'{{year}}年{{month}}月'],'minYear'=>1950,'maxYear'=>date('Y'),'empty'=>true))?>
                     </td>
                 </tr>
+               
             </table>
                 <?= $this->Form->submit('登録',['class'=>'button'])?>
                 <?=$this->Form->end();?>
