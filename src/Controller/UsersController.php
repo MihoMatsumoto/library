@@ -16,17 +16,16 @@ class UsersController extends AppController{
     // $this->set("sampleText","サンプルページです。");
         ///
         if ($this->request->is('post')) {
-        var_dump($this->request->data['password']); 
         $password=$this->request->data['password'];
        
             $user = $this->Auth->identify();
-            print_r($user);
             if ($user) {
                 $this->Auth->setUser($user);
 
                 return $this->redirect($this->Auth->redirectUrl());
             }else{
-            $this->Flash->error('ユーザー名またはパスワードが不正です。');
+            // $this->Flash->error('ユーザー名またはパスワードが不正です。');
+            $this->Flash->set('ユーザー名またはパスワードが不正です。',['key'=>'err']);
             }
         }
        

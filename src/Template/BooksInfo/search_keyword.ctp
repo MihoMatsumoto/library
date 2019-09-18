@@ -12,7 +12,10 @@
 <body>
     
     <div class="bg-rgba">
-    <h2>キーワード検索</h2><br>
+    <h2>キーワード検索</h2>
+    <div>※何も入力しない場合は全検索になります</div>
+    
+    <br>
 
 <table >
     <?=$this->Form->create(null,["controller"=>"BooksInfo","action"=>"keyResult"]);?>   

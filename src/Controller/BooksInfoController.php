@@ -10,8 +10,9 @@ class BooksInfoController extends AppController{
     public function index(){
 
     }
-    public function insert(){
 
+    //書籍登録
+    public function insert(){
 
           // セッションにバリデーションエラーを保持したエンティティが保存されていないか調査
         $session = $this->request->getSession();
@@ -25,7 +26,6 @@ class BooksInfoController extends AppController{
           
         
     }
-
     public function compInsert(){
        if($this->request->is('post')){
                 $session = $this->request->getSession();
@@ -52,12 +52,10 @@ class BooksInfoController extends AppController{
                 $session->write('ValidationError', $entiey);
                 return $this->redirect(['action'=>'insert']);
             }
-
-
-       }
-   
-        
+        }
     }
+
+    //キーワード検索
     public function searchKeyword(){
 
     }
@@ -71,7 +69,15 @@ class BooksInfoController extends AppController{
             $data= $this->BooksInfo->find()->where(['user_id '=>$userId]);
             }
             //キーワード入力
-            $data= $this->BooksInfo->find()->where(['user_id '=>$userId,'OR'=>[["title like "=>'%'.$key.'%'],["author like "=>'%'.$key.'%'],["publisher like "=>'%'.$key.'%'],["year_month like "=>'%'.$key.'%']]]);
+            $data= $this->BooksInfo->find()
+            ->where(
+                ['user_id '=>$userId,
+                    'OR'=>[
+                        "title like "=>'%'.$key.'%',
+                        "author like "=>'%'.$key.'%',
+                        "publisher like "=>'%'.$key.'%',
+                        "year_month like "=>'%'.$key.'%'
+                        ]]);
             
             $this->set('datas',$data);
             //検索結果が無い場合
@@ -81,52 +87,55 @@ class BooksInfoController extends AppController{
                 $this->set('err',$error);
             }
         }
-        
-
     }
+
+
+    //詳細検索
     public function searchDetail(){
-        // $session=$this->request->getSession();
-        // $msg=$session->read('msg');
-        // $session->consume('msg');
-        // $this->set('msg',$msg);
-        
-
+      
 
     }
+
     public function DetailResult(){
-    if($this->request->is('post')){
-        $session=$this->request->getSession();
-        $session->consume('msg');
 
-        $userId = $this->request->session()->read('Auth.User.user_id');
-        $year =$this->request->getData('yearMonth.year');
-        $month = $this->request->getData('yearMonth.month');
-        $yearMonth = $year.'-'.$month;
-        $title = $this->request->getData('title');
-        $author=$this->request->getData('author');
-        $publisher=$this->request->getData('publisher');
-        $error='';
-        if(!empty($year)||!empty($month)||!empty($title)||!empty($author)||!empty($publisher)){
+        if($this->request->is('post')){
+            
+            //viewから受け取った値セット
+            $userId = $this->request->session()->read('Auth.User.user_id');
+            $year =$this->request->getData('yearMonth.year');
+            $month = $this->request->getData('yearMonth.month');
+            $yearMonth = $year.'-'.$month;
+            $title = $this->request->getData('title');
+            $author=$this->request->getData('author');
+            $publisher=$this->request->getData('publisher');
+            $error='';
 
-        $data= $this->BooksInfo->find()->where(['user_id '=>$userId,["title like "=>'%'.$title.'%'],["author like "=>'%'.$author.'%'],["publisher like "=>'%'.$publisher.'%'],["year_month like "=>'%'.$yearMonth.'%']]);
+            //フォームのいづれかが埋まっているか
+            if(!empty($year)||!empty($month)||!empty($title)||!empty($author)||!empty($publisher)){
 
-        $this->set('datas',$data);
+            $data= $this->BooksInfo->find()
+                ->where([
+                    "user_id "=>$userId,
+                    "title like "=>'%'.$title.'%',
+                    "author like "=>'%'.$author.'%',
+                    "publisher like "=>'%'.$publisher.'%',
+                    "year_month like "=>'%'.$yearMonth.'%'
+                ]);
 
-        if($data->isEmpty()){
-            $error ='検索結果はありません';
-            $this->set('err',$error);
+            $this->set('datas',$data);
+                //検索結果が無い場合
+                if($data->isEmpty()){
+                    $error ='検索結果はありません';
+                    $this->set('err',$error);
+                }
+
+            //フォームが一つも埋まっていない場合
+            }else{
+                $session = $this->request->getSession();
+                $error ='全て空欄です。入力してください。';
+                $session->write('msg',$error);
+                $this->redirect(['action'=>'searchDetail']);
+            }
         }
-    }else{
-        $session = $this->request->getSession();
-        $error ='いづれか入力してください';
-        $session->write('msg',$error);
-        $this->redirect(['action'=>'searchDetail']);
     }
-
-       
-        }
-    }
-    
-
-
 }
