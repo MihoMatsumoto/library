@@ -20,7 +20,7 @@ class BooksInfoTable extends Table{
         ->notEmpty('title','題名は必須項目です。入力してください。')
         
         ->notBlank('title','題名は必須項目です。入力してください。')
-        ->add('title','blunkCheck',['rule'=>['custom','/[^　]+/'],
+        ->add('title','blunkCheck',['rule'=>['custom','/[^　\ ]+/'],
             'message'=>'題名は必須項目です。入力してください。'
         ]);
 

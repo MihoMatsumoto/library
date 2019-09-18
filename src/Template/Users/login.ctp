@@ -5,9 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <?= $this->Html->css('myBookShelfCSS.css') ?>
 
-    
-
-
 </head>
 
 <body>
@@ -21,31 +18,32 @@
             <br>
             
             <?php
-            // "null",array("type"=>"get","controller"=>"Users","action"=>"functionList"
             echo $this->Form->create();
             ?>
             <table>
-            <tr>
-            <td>
-            <span class="fontWhite">ID</span></td>
-            <!-- <?php
-            echo $this->Form->input('user',['label'=>false]);
-            ?> -->
-            <td>
-            <input Type="text" name="user_id"></td>
-            </tr>
-            <tr><td>
-            <span class="fontWhite">Password</span></td>
-            <td>
+                <tr><div style='color:white;'>
+                <?=$this->Flash->render('err');?>
+                </div>
+                    <td>
+                        <span class="fontWhite">ID</span>
+                    </td>
+                    <td>
+                        <input Type="text" name="user_id">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="fontWhite">Password</span>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->Form->input('password',['label'=>false]);?>
+                    </td>
+                </tr>
+            </table>
             <?php
-            echo $this->Form->input('password',['label'=>false]);?></td>
-            </tr>
-</table>
-            <div class="button" >
-            <!-- style="position:absolute;right:10px;" -->
-            <?php
-            echo $this->Form->button('ログイン',['type'=>'submit']);
-            ?></div>
+            echo $this->Form->submit('ログイン',['class'=>'button']);
+            ?>
             <?php
             echo $this->Form->end();
 
