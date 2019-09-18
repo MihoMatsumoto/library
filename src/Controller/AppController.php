@@ -46,10 +46,50 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
+        
+
+
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+
+
+        $this->loadComponent('Auth',[
+            //送信されたフォームデータのキーとログイン処理の紐づけの設定
+            'loginAction'=>[
+                'controller'=>'Users',
+                'action'=>'login'
+            ],
+            'authenticate'=>[
+                'Form'=>[
+                    // 'userModel' => 'users',
+                    'fields'=>[
+                        'username'=>'user_id',
+                        'password'=>'password'
+                    ]
+                ]
+            ],
+            'loginRedirect' => [
+                'controller'=>'Users',
+                'action'=>'index'
+            ],
+            // 'storage'=>'Session',
+            // コントローラーで isAuthorized を使用します
+            // 'authorize' => ['Controller'],
+             // 未認証の場合、直前のページに戻します
+             'unauthorizedRedirect' => $this->referer()
+        ]);
+        $this->Auth->allow(['display','view','index']);
+        // ['display','index','view']
     }
+    public function beforeFilter(Event $event) {
+
+        parent::beforeFilter($event);
+        //値を変更する
+        $this->Auth->allow('index');
+        $this->Auth->config('authError', false);
+        
+        }
 }
