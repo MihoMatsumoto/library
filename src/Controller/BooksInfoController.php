@@ -20,11 +20,11 @@ class BooksInfoController extends AppController{
 
           // エンティティはきちんと削除
         $session->consume('ValidationError');
-  
+
           // TemplateにUserエンティティを送る
           $this->set('ValidationError',$error);
-          
-        
+
+
     }
     public function compInsert(){
        if($this->request->is('post')){
@@ -44,9 +44,9 @@ class BooksInfoController extends AppController{
             $entiey->user_id = $userId;
             $entiey->year_month = $yearMonth;
             $booksInfoTable->save($entiey);
-            
+
             $this->set(compact('entiey'));
-            
+
             //エラーがある場合（登録ページに遷移、エラーをsessionにセット）
             }else{
                 $session->write('ValidationError', $entiey);
@@ -78,11 +78,11 @@ class BooksInfoController extends AppController{
                         "publisher like "=>'%'.$key.'%',
                         "year_month like "=>'%'.$key.'%'
                         ]]);
-            
+
             $this->set('datas',$data);
             //検索結果が無い場合
             if($data->isEmpty()){
-                
+
                 $error ='検索結果はありません';
                 $this->set('err',$error);
             }
@@ -92,14 +92,14 @@ class BooksInfoController extends AppController{
 
     //詳細検索
     public function searchDetail(){
-      
+
 
     }
 
     public function DetailResult(){
 
         if($this->request->is('post')){
-            
+
             //viewから受け取った値セット
             $userId = $this->request->session()->read('Auth.User.user_id');
             $year =$this->request->getData('yearMonth.year');
@@ -138,4 +138,20 @@ class BooksInfoController extends AppController{
             }
         }
     }
+    //書籍一覧表示
+    public function searchAllBooks(){
+        $data = $this->BooksInfo->find('all');
+        $this->set('datas',$data);
+
+    }
+    //書籍詳細
+    public function detailBooksInfo($book_id=null){
+        // var_dump($this->request->getQuery('book_id'));
+
+        $infos = $this->BooksInfo->find()->where(['id '=>$book_id]);
+        $this->set(compact('infos'));
+
+
+    }
+
 }
