@@ -9,7 +9,7 @@
     <script type="text/javascript">
     // 自分自身をフォローできないようにする
     window.onload = function(){
-        $(".<?= $this->request->session()->read('Auth.User.user_id')?>").prop("disabled",true);
+        $("#<?= $this->request->session()->read('Auth.User.user_id')?>").prop("disabled",true);
       }
     </script>
 
@@ -32,9 +32,8 @@
                 </tr>
 
                 <div style="display:none;">
-                <!-- <? $this->Form->create(null,["controller"=>"Follows","action"=>"follow"]);?> -->
+                <!-- <?= $this->Form->create(null,["controller"=>"Follows","action"=>"follow"]);?> -->
                 </div>
-                <!-- <form> -->
                 <?php foreach($infos as $info):?>
                 <form action="http://localhost/follows/follow">
 
@@ -42,7 +41,7 @@
                     <td><?=h($info['name']);?></td>
                     <td><?=h($info['user_id']);?></td>
                         <input type="hidden" name="user_id" value="<?=h($info['user_id']);?>"/>
-                    <td><?=$this->Form->submit('フォロー',['class'=>$info['user_id']])?></td>
+                    <td><?=$this->Form->submit('フォロー',['class'=>'button2']);?></td>
                     </td>
                 </tr>
                 </form>

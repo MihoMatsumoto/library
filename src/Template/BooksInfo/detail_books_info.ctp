@@ -48,9 +48,59 @@
                 </tr>
 
         <?php endforeach;?>
-
-<div>レビューまだ！！！</div>
             </table>
+
+            <div style="text-align:left">
+                <h3>レビュー作成</h3>
+                <fieldset>
+                <?= $this->Form->create(null,['url'=>["controller"=>"Reviews","action"=>"index"]]);?>
+
+                <div>書名：<?= h($info['title'])?></div>
+                <input type="hidden" name='book_id' value='<?= h($info['id'])?>'/>
+                <br>
+
+                <div>本文</div>
+                <div>
+                    <?= $this->Form->input('text',[
+                        'type'=>'textarea',
+                        'cols'=>60,
+                        'rows'=>5,
+                        'label'=>false,
+                        'maxlength'=>500
+                    ]);?>
+                </div>
+                    <?= $this->Form->submit('送信',['class'=>'button2'])?>
+                <?= $this->Form->end();?>
+                </fieldset>
+
+                <h3>この本のレビュー</h3>
+                <?php if(!empty($messege)){
+                    echo $messege;
+                }?>
+                <?php if(!empty($reviews)):
+                foreach($reviews as $review):?>
+                <fieldset>
+                <div>
+                <?= $review['user_id'];?>さんのレビュー
+                </div>
+                <br>
+                <div>
+                <?= $review['text'];?>
+                <br>
+                    <div style='text-align:right;'>
+                    <?= $review['created'];?>
+                    </div>
+                </div>
+
+                </fieldset>
+                    <?php endforeach;
+                    endif;?>
+            </div>
+
+
+
+
+
 <br>
 
             <a href="<?=$this->Url->build(['controller'=>'BooksInfo','action'=>'search_all_books']);?>" class="underLeft">書籍一覧に戻る</a>

@@ -146,10 +146,29 @@ class BooksInfoController extends AppController{
     }
     //書籍詳細
     public function detailBooksInfo($book_id=null){
-        // var_dump($this->request->getQuery('book_id'));
 
+        //書籍の詳細取得
         $infos = $this->BooksInfo->find()->where(['id '=>$book_id]);
         $this->set(compact('infos'));
+
+        //書籍のレビュー取得
+        $this->Reviews = TableRegistry::get('reviews');
+
+        $reviews = $this->Reviews->find();
+        $reviews->
+        select(['user_id','text','created'])->
+        distinct(['user_id'])->
+        where(['book_id'=>$book_id])->
+        order(['user_id'=>'asc'])->
+        order(['id'=>'desc']);
+
+        if($reviews->isEmpty()){
+            $message = 'レビューはありません';
+            $this->set('messege',$message);
+        }
+        else{
+        $this->set('reviews',$reviews);
+        }
 
 
     }
