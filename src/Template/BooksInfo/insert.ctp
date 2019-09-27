@@ -5,16 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <?= $this->Html->css('myBookShelfCSS.css') ?>
 
-    
+
 
 </head>
 
 <body>
-    
+
     <div class="bg-rgba">
         <h2>書籍登録</h2>
         <table >
-                <?= $this->Form->create($ValidationError,array("controller"=>"BooksInfo","action"=>"compInsert"));
+                <?= $this->Form->create($ValidationError,array('url'=>["controller"=>"BooksInfo","action"=>"compInsert"]));
                  ?>
                  <tr>
                  <!-- <div style="color:red;"> -->
@@ -47,13 +47,13 @@
                     'type'=>'datetime','dateformat'=>'YMD','monthNames'=>false,'templates'=>['dateWidget'=>'{{year}}年{{month}}月'],'minYear'=>1950,'maxYear'=>date('Y'),'empty'=>true))?>
                     </td>
                 </tr>
-               
+
             </table>
                 <?= $this->Form->submit('登録',['class'=>'button'])?>
                 <?=$this->Form->end();?>
-            
+
                 <a href="<?=$this->Url->build(['controller'=>'Users','action'=>'index']);?>" class="underLeft">機能一覧に戻る</a>
-                
+
     </div>
 
 
